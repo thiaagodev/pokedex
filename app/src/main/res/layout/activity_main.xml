@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pokedex"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             />
