@@ -8,4 +8,6 @@ class SimplePokemon {
 
     @SerializedName("url")
     lateinit var url: String
+
+    // image https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/1.png
 }
