@@ -2,12 +2,17 @@ package com.thiaagodev.pokedex.service.model
 
 import com.google.gson.annotations.SerializedName
 
+class PokemonResponse {
+    @SerializedName("results")
+    var results: List<Pokemon>? = null
+}
+
 class Pokemon {
     @SerializedName("name")
-    lateinit var name: String
+    var name: String? = null
 
     @SerializedName("url")
-    lateinit var url: String
+    var url: String? = null
 
     @SerializedName("types")
     var types: List<PokemonType?>? = null
