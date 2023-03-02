@@ -7,13 +7,13 @@ import com.thiaagodev.pokedex.service.repository.remote.PokemonService
 
 class PokemonRepository(private val service: PokemonService) : BaseRepository() {
 
-    fun getAll() = liveData {
+    suspend fun getAll() = liveData {
         val result = execute(service.getAll())
 
         emit(result)
     }
 
-    fun getDetails(pokemons: List<Pokemon>) = liveData {
+    suspend fun getDetails(pokemons: List<Pokemon>) = liveData {
         val pokemonList = mutableListOf<Pokemon>()
         pokemons.map {
             val pokemonResult = execute(service.getData(it.name))

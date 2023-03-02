@@ -18,10 +18,6 @@ class PokemonListFragment : Fragment() {
 
     private val viewModel: PokemonViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,14 +30,21 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getAll().observe(viewLifecycleOwner) {
+        viewModel.getAll()
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.pokemonList.observe(viewLifecycleOwner) {
             if (it is ResultAPI.Success) {
                 it.data?.results?.let { pokemons ->
-                    viewModel.getDetails(pokemons).observe(viewLifecycleOwner) {
-                        Log.d("Pokemon List", "$it")
-                    }
+                    viewModel.getDetails(pokemons)
                 }
             }
+        }
+
+        viewModel.pokemonsDetails.observe(viewLifecycleOwner) {
+            Log.d("Pokemon List", "$it")
         }
     }
 
