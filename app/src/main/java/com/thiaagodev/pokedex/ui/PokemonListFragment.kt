@@ -45,6 +45,7 @@ class PokemonListFragment : Fragment() {
 
         viewModel.pokemonsDetails.observe(viewLifecycleOwner) {
             Log.d("Pokemon List", "$it")
+            binding.pokemonLoading.visibility = View.GONE
         }
     }
 
