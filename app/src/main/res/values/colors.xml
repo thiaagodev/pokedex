@@ -5,4 +5,8 @@
     <color name="red_200">#ff5131</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#E20B0B</color>
+    <color name="orange">#FF5722</color>
+    <color name="blue">#1095FF</color>
+    <color name="gray">#6EA4AB</color>
 </resources>
