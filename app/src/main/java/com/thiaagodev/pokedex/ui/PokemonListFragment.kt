@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.thiaagodev.pokedex.databinding.FragmentPokemonListBinding
 import com.thiaagodev.pokedex.service.model.ResultAPI
+import com.thiaagodev.pokedex.ui.adapters.PokemonAdapter
 import com.thiaagodev.pokedex.ui.viewmodel.PokemonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +18,7 @@ class PokemonListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: PokemonViewModel by viewModel()
+    private val adapter = PokemonAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,8 @@ class PokemonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerPokemonList.adapter = adapter
 
         viewModel.getAll()
         observe()
@@ -44,8 +48,8 @@ class PokemonListFragment : Fragment() {
         }
 
         viewModel.pokemonsDetails.observe(viewLifecycleOwner) {
-            Log.d("Pokemon List", "$it")
             binding.pokemonLoading.visibility = View.GONE
+            adapter.updatePokemonList(it)
         }
     }
 
