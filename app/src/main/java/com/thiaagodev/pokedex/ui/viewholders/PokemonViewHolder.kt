@@ -5,9 +5,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.thiaagodev.pokedex.databinding.PokemonItemBinding
 import com.thiaagodev.pokedex.service.model.Pokemon
+import com.thiaagodev.pokedex.ui.listeners.PokemonListener
 import java.util.Locale
 
-class PokemonViewHolder(private val binding: PokemonItemBinding) :
+class PokemonViewHolder(
+    private val binding: PokemonItemBinding,
+    private val listener: PokemonListener?
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(pokemon: Pokemon, index: Int) {
@@ -23,5 +27,9 @@ class PokemonViewHolder(private val binding: PokemonItemBinding) :
         }
         binding.textPokemonNumber.text = "#${index + 1}"
         binding.container.setBackgroundColor(Color.parseColor(pokemon.primaryTypeColor))
+
+        binding.root.setOnClickListener {
+            listener?.onClick(pokemon, index)
+        }
     }
 }

@@ -1,14 +1,17 @@
 package com.thiaagodev.pokedex.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.thiaagodev.pokedex.R
 import com.thiaagodev.pokedex.databinding.FragmentPokemonListBinding
+import com.thiaagodev.pokedex.service.model.Pokemon
 import com.thiaagodev.pokedex.service.model.ResultAPI
 import com.thiaagodev.pokedex.ui.adapters.PokemonAdapter
+import com.thiaagodev.pokedex.ui.listeners.PokemonListener
 import com.thiaagodev.pokedex.ui.viewmodel.PokemonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,6 +22,10 @@ class PokemonListFragment : Fragment() {
 
     private val viewModel: PokemonViewModel by viewModel()
     private val adapter = PokemonAdapter()
+
+    private val navController by lazy {
+        findNavController()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +40,13 @@ class PokemonListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerPokemonList.adapter = adapter
+        adapter.attachListener(object : PokemonListener {
+            override fun onClick(pokemon: Pokemon, index: Int) {
+                viewModel.setSelectedPokemon(pokemon)
+                viewModel.selectedPokemonIndex = index
+                navController.navigate(R.id.action_pokemonListFragment_to_pokemonDetailsFragment)
+            }
+        })
 
         viewModel.getAll()
         observe()

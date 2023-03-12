@@ -15,11 +15,17 @@ import observeOnce
 
 class PokemonViewModel(private val repository: PokemonRepository) : ViewModel() {
 
+    var selectedPokemonIndex: Int? = null
+
     private val _pokemonList = MutableLiveData<ResultAPI<PokemonResponse?>>()
     val pokemonList: LiveData<ResultAPI<PokemonResponse?>> = _pokemonList
 
     private val _pokemonsDetails = MutableLiveData<MutableList<Pokemon>>()
     val pokemonsDetails: LiveData<MutableList<Pokemon>> = _pokemonsDetails
+
+    private val _selectedPokemon = MutableLiveData<Pokemon>()
+    val selectedPokemon: LiveData<Pokemon> = _selectedPokemon
+
     fun getAll() {
         viewModelScope.launch {
             val result = repository.getAll()
@@ -36,6 +42,10 @@ class PokemonViewModel(private val repository: PokemonRepository) : ViewModel() 
                 _pokemonsDetails.value = it
             }
         }
+    }
+
+    fun setSelectedPokemon(selectedPokemon: Pokemon) {
+        _selectedPokemon.value = selectedPokemon
     }
 }
 

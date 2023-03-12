@@ -5,16 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thiaagodev.pokedex.databinding.PokemonItemBinding
 import com.thiaagodev.pokedex.service.model.Pokemon
+import com.thiaagodev.pokedex.ui.listeners.PokemonListener
 import com.thiaagodev.pokedex.ui.viewholders.PokemonViewHolder
 
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonViewHolder>() {
     private var pokemonList: List<Pokemon> = listOf()
+    private var listener: PokemonListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val item = PokemonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return PokemonViewHolder(item)
+        return PokemonViewHolder(item, listener)
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +30,9 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonViewHolder>() {
     fun updatePokemonList(list: List<Pokemon>) {
         pokemonList = list
         notifyDataSetChanged()
+    }
+
+    fun attachListener(pokemonListener: PokemonListener) {
+        listener = pokemonListener
     }
 }

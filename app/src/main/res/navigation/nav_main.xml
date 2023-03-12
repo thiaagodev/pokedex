@@ -7,8 +7,23 @@
 
     <fragment
         android:id="@+id/pokemonListFragment"
-        android:label="Pokemon List"
         android:name="com.thiaagodev.pokedex.ui.PokemonListFragment"
+        android:label="Pokemon List"
         tools:layout="@layout/fragment_pokemon_list"
-        />
+
+        >
+        <action
+            android:id="@+id/action_pokemonListFragment_to_pokemonDetailsFragment"
+            app:destination="@id/pokemonDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pokemonDetailsFragment"
+        android:name="com.thiaagodev.pokedex.ui.PokemonDetailsFragment"
+        android:label="Pokemon Details"
+        tools:layout="@layout/fragment_pokemon_details">
+        <action
+            android:id="@+id/action_pokemonDetailsFragment_to_pokemonListFragment"
+            app:destination="@id/pokemonListFragment" />
+    </fragment>
 </navigation>

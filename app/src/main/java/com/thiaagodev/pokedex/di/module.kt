@@ -21,5 +21,5 @@ val module = module {
 
     factory<PokemonRepository> { PokemonRepository(get()) }
 
-    viewModel<PokemonViewModel> { PokemonViewModel(get()) }
+    single<PokemonViewModel> { PokemonViewModel(get()) }
 }
