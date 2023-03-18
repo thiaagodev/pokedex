@@ -20,7 +20,7 @@ class Pokemon {
     @SerializedName("stats")
     var stats: List<PokemonStat?>? = null
 
-    private val pokemonColorsByType: Map<String, String> = mapOf(
+    val pokemonColorsByType: Map<String, String> = mapOf(
         Pair("normal", "#A8A77A"),
         Pair("fire", "#EE8130"),
         Pair("water", "#6390F0"),

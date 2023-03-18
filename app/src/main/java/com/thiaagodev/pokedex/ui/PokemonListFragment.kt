@@ -27,6 +27,10 @@ class PokemonListFragment : Fragment() {
         findNavController()
     }
 
+    private val parentActivity by lazy {
+        requireActivity() as MainActivity
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +54,13 @@ class PokemonListFragment : Fragment() {
 
         viewModel.getAll()
         observe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        parentActivity.apply {
+            this.showToolbar()
+        }
     }
 
     private fun observe() {
